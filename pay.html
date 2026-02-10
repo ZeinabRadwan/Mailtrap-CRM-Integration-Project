@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>الدفع - قلاري</title>
+  <style>
+    body {
+      font-family: Tahoma, sans-serif;
+      background-color: #f4f6f8;
+      padding: 30px;
+      color: #333;
+    }
+    .payment-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .payment-option {
+      display: inline-block;
+      width: 120px;
+      margin: 20px;
+      cursor: pointer;
+    }
+    .payment-option img {
+      width: 100px;
+      height: auto;
+    }
+    .print-btn {
+      display: inline-block;
+      background-color: #e8932d;
+      color: white;
+      padding: 10px 25px;
+      margin-top: 40px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="payment-container">
+    <h1>خيارات الدفع</h1>
+    <div>
+      <div class="payment-option">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/Mada_Logo.svg" alt="mada" />
+        <p>مدى</p>
+      </div>
+      <div class="payment-option">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Pay" />
+        <p>Apple Pay</p>
+      </div>
+      <div class="payment-option">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/Tabby_Logo.svg" alt="Tabby" />
+        <p>تابي</p>
+      </div>
+      <div class="payment-option">
+        <img src="https://companieslogo.com/img/orig/Tamara-641d97fe.png?t=1633519026" alt="Tamara" />
+        <p>تمارا</p>
+      </div>
+    </div>
+    <a href="javascript:window.print()" class="print-btn">طباعة</a>
+  </div>
+</body>
+</html>

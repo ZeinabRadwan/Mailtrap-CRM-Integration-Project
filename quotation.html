@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>فاتورة ضريبية - قلاري</title>
+    <style>
+        body {
+            font-family: "Effra", Tahoma, Arial, sans-serif;
+            background-color: #f9fafb;
+            padding: 30px;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .invoice-container {
+            background-color: #fff;
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px 40px;
+            border-radius: 16px;
+            border: 1px solid #e1e8f0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto 25px;
+            max-width: 100%;
+            height: 50px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #e8932d;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 16px 24px;
+            font-weight: 600;
+            font-size: 17px;
+            color: #34495e;
+            background-color: #ffffff;
+            border: 1px solid #d1d9e6;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            min-width: 280px;
+        }
+
+        .header-info div {
+            flex: 1;
+            text-align: center;
+            padding: 0 10px;
+            white-space: nowrap;
+        }
+
+        .header-info div strong {
+            font-weight: 700;
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+            color: #324265;
+            border: 1px solid #e1e8f0;
+        }
+
+        th,
+        td {
+            border: 1px solid #e1e8f0;
+            padding: 12px 15px;
+            vertical-align: top;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f7f9fb;
+            font-weight: 700;
+            color: #51688f;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-weight: 600;
+            font-size: 16px;
+            color: #2c3e50;
+            border: 1px solid #e1e8f0;
+            background-color: #fff;
+        }
+
+        .summary-table td {
+            border: 1px solid #e1e8f0;
+            padding: 12px 20px;
+            text-align: right;
+            color: #34495e;
+        }
+
+        .summary-table td:nth-child(odd) {
+            font-weight: 700;
+            background-color: #f7f9fb;
+            width: 25%;
+        }
+
+        .summary-table td:nth-child(even) {
+            width: 25%;
+        }
+
+        .amount-in-words {
+            font-style: italic;
+            color: #34495e;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        strong {
+            color: #5c8deb;
+        }
+
+        .bank-info {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 50px;
+            text-align: right;
+        }
+
+        .bank-table {
+    width: 100%;
+    border: 1px solid #e1e8f0;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 40px;
+    font-size: 16px;
+    color: #34495e;
+    text-align: right;
+    background-color: #fff;
+}
+
+.bank-table td {
+    padding: 14px 18px;
+    border: 1px solid #e1e8f0;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+        .btn-group {
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #324265;
+            color: white;
+            padding: 14px 35px;
+            margin: 0 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-print {
+            background-color: #e8932d;
+        }
+
+        .btn:hover {
+            background-color: #283850;
+        }
+
+        .btn-print:hover {
+            background-color: #c17b1f;
+        }
+
+        @media print {
+            .btn-group ,.logo {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img src="https://cdn.glary.sa/gmc-assets/img/logo/header-logo.gif" alt="قلاري للإدارة السحابية" class="logo" />
+    <div class="invoice-container">
+        <h1>عرض سعر</h1>
+
+        <div class="header-info">
+            <div><strong>تاريخ الإصدار :</strong> 2025-06-17</div>
+            <div><strong>رقم الفاتورة :</strong> 609801</div>
+        </div>
+
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>الاسم</th>
+                        <th>الرقم الضريبي</th>
+                        <th>السجل التجاري</th>
+                        <th>الدولة</th>
+                        <th>المدينة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td
+                            style="width: 130px; background-color: #f7f9fb; color: #5c8deb; font-weight: 700; font-size: 18px; vertical-align: middle; padding: 20px 10px;">
+                            المورد</td>
+                        <td>مؤسسة قلاري الإبداع لتقنية نظم المعلومات</td>
+                        <td>301270962100003</td>
+                        <td>2054100469</td>
+                        <td>المملكة العربية السعودية</td>
+                        <td>الخبر</td>
+                    </tr>
+                    <tr>
+                        <td
+                            style="width: 130px; background-color: #f7f9fb; color: #5c8deb; font-weight: 700; font-size: 18px; vertical-align: middle; padding: 20px 10px;">
+                            العميل</td>
+                        <td>شركة فال الغربية</td>
+                        <td>-</td>
+                        <td>4030583279</td>
+                        <td>المملكة العربية السعودية</td>
+                        <td>جدة</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </section>
+
+        <section>
+            <table>
+                <thead>
+                    <tr>
+                        <th>الخدمة</th>
+                        <th>الوصف</th>
+                        <th>سعر الوحدة</th>
+                        <th>الكمية</th>
+                        <th>الإجمالي</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>اشتراك بالباقة الذهبية</td>
+                        <td>
+                            لمدة سنة كاملة (فرعين، 5 مستخدمين، فواتير إلكترونية، محاسبة مالية، إدارة مخزون، منيو
+                            إلكتروني، متجر إلكتروني، تدريب ودعم فني مجاني طوال فترة الاشتراك)
+                        </td>
+                        <td>2,990 ر.س</td>
+                        <td>1</td>
+                        <td>2,990 ر.س</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <table class="summary-table">
+                <tbody>
+                    <tr>
+                        <td>المجموع الفرعي:</td>
+                        <td>2,990 ر.س</td>
+                        <td>الخصم:</td>
+                        <td>500 ر.س</td>
+                    </tr>
+                    <tr>
+                        <td>المجموع بعد الخصم:</td>
+                        <td>2,490 ر.س</td>
+                        <td>ضريبة القيمة المضافة (15%):</td>
+                        <td>373.5 ر.س</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table style="width:100%; border-collapse: collapse; font-size: 16px; color: #e8932d; font-weight: 700;">
+                <tbody>
+                    <tr>
+                        <td style="text-align: center; background-color: #f7f9fb; width: 50%;">
+                            الإجمالي شامل الضريبة:
+                        </td>
+                        <td style="text-align: center; background-color: #f7f9fb;width: 50%;">
+                            2,863.5 ر.س
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"
+                            style="text-align: center; font-style: italic; color: #5c8deb; font-weight: normal;">
+                            كتابة المبلغ: فقط ألفان وثمانمائة وثلاثة وستون ريال ونصف لا غير
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+<section>
+    <h3>معلومات الحساب البنكي</h3>
+    <table class="bank-table">
+        <tr>
+            <td><strong>اسم الحساب:</strong> مؤسسة قلاري الإبداع لتقنية نظم المعلومات</td>
+            <td><strong>البنك:</strong> بنك الراجحي</td>
+            <td><strong>رقم الحساب:</strong> SA1234567890123456789012</td>
+        </tr>
+    </table>
+</section>
+
+
+        <div class="btn-group">
+            <a href="javascript:window.print()" class="btn btn-print">طباعة الفاتورة</a>
+            <a href="pay.html" class="btn">التالي: الدفع</a>
+        </div>
+    </div>
+</body>
+
+</html>
