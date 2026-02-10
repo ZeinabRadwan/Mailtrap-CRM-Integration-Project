@@ -1,61 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Mailtrap CRM Integration Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel application for sending transactional and campaign emails with CRM-style contact management. It integrates with [Mailtrap](https://mailtrap.io) (or any SMTP provider) for email delivery and keeps a log of sent emails with optional monthly limits.
 
-## About Laravel
+## What This Project Does
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Send emails** to custom recipient lists, to all **Customers**, or to all **Clients (Follow-up)** from the database.
+- **Personalize messages** using a `{{ $name }}` placeholder that is replaced with each recipient’s name.
+- **Log every send** (recipient, subject, message, status) and view history on the Email Logs page.
+- **Enforce a monthly sending limit** (e.g. 5 emails/month) on the subscribe/send flow.
+- **Use Mailtrap** (or another SMTP server) for development and testing without sending real email.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Laravel 12** (PHP 8.2+)
+- **SQLite** by default (configurable in `.env`)
+- **Laravel Breeze** for authentication
+- **Tailwind CSS** and **Vite** for the frontend
+- **Laravel Mail** with SMTP (e.g. Mailtrap) or log driver
 
-## Learning Laravel
+## Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Feature | Route | Description |
+|--------|--------|-------------|
+| Welcome | `/` | Home page |
+| Send test email | `/send-test-email/{email}` | Sends a single test email to the given address |
+| Send to multiple | `/send-multiple` | Form to send one subject/message to a list of emails (with names). Logs to Email Logs. |
+| Send to customers | `/send-to-customers` | Sends to all records in the **customers** table (personalized by name) |
+| Send to clients | `/send-to-clients` | Sends to all records in the **clients_follow_up** table (personalized by name) |
+| Subscribe / send | `/subscribe-send-email` | Send with custom From name/email; respects monthly limit and logs to Email Logs |
+| Email logs | `/email-logs` | View all sent/failed emails, count for current month, and monthly limit |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Data Models
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Customer**: `ar_name`, `en_name`, `email`
+- **ClientsFollowUp** (table: `clients_follow_up`): `ar_name`, `email`
+- **EmailLog**: `recipient_name`, `recipient_email`, `subject`, `message`, `status` (sent/failed), timestamps
 
-## Laravel Sponsors
+## Setup
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Clone and install
 
-### Premium Partners
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Database
 
-## Contributing
+Using SQLite (default):
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+touch database/database.sqlite
+php artisan migrate
+```
 
-## Code of Conduct
+Optional: seed sample customers and clients:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan db:seed
+```
 
-## Security Vulnerabilities
+To use MySQL/PostgreSQL, set `DB_CONNECTION`, `DB_DATABASE`, `DB_USERNAME`, and `DB_PASSWORD` in `.env` and run `php artisan migrate`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 3. Mail (Mailtrap or SMTP)
+
+For **Mailtrap**, in `.env` set:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=your_mailtrap_username
+MAIL_PASSWORD=your_mailtrap_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="noreply@yourdomain.com"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+For **local testing without sending real email**, use the log driver:
+
+```env
+MAIL_MAILER=log
+```
+
+Messages will be written to `storage/logs/laravel.log`.
+
+### 4. Frontend and run
+
+```bash
+npm install
+npm run dev
+```
+
+In another terminal:
+
+```bash
+php artisan serve
+```
+
+Open `http://localhost:8000` (or your configured `APP_URL`).
+
+## Configuration
+
+- **Monthly limit** for the subscribe/send feature is set in code (e.g. `$monthlyLimit = 5` in `routes/web.php`). Adjust there if needed.
+- **Queue**: default is `QUEUE_CONNECTION=database`. For background sending, run `php artisan queue:work` (or use the `dev` script that includes queue and logs).
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
